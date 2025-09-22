@@ -22,3 +22,4 @@ tensorflow
 pandas-ta
 python-telegram-bot==20.3
 urllib3
+Flask==2.3.3

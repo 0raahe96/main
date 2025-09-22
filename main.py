@@ -67,6 +67,24 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 # في بداية الكود، تأكد من إعداد التسجيل المناسب
 import logging
 import sys
+from flask import Flask
+import threading
+import os
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "🤖 البوت يعمل على Render!"
+
+def run_flask():
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
+
+# تشغيل السيرفر في Thread منفصل
+threading.Thread(target=run_flask, daemon=True).start()
+
+
 
 # إعداد نظام التسجيل لدعم Unicode
 class UnicodeStreamHandler(logging.StreamHandler):

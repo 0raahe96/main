@@ -1,0 +1,24 @@
+# أساسيات النظام
+psutil
+pandas
+numpy
+joblib
+aiohttp
+shutilwhich  
+glob2         
+asyncio       
+ccxt
+matplotlib
+mplfinance
+onnxruntime
+requests
+feedparser
+python-binance
+scikit-learn
+xgboost
+onnxmltools
+python-dotenv
+tensorflow
+pandas-ta
+python-telegram-bot==20.3
+urllib3

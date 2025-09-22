@@ -94,6 +94,12 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+
+BINANCE_API_KEY = os.getenv("BINANCE_API_KEY")
+BINANCE_API_SECRET = os.getenv("BINANCE_API_SECRET")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+AUTHORIZED_USER_ID = os.getenv("AUTHORIZED_USER_ID")
+
 # ====== تحميل المتغيرات البيئية ======
 current_dir = os.path.dirname(os.path.abspath(__file__))
 env_path = os.path.join(current_dir, '.env')

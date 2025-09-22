@@ -1,10 +1,3 @@
-BINANCE_API_KEY = 'oEok230IEsSsqlLu0NUEJ503iF2PY1V4sufNfHTZN8O4vViBbIeCBadaiBUvEbka'
-BINANCE_API_SECRET = 'eQjZ9oIA7ePtzwNhQKwRBRP0148yu7PrVgStKKeH1N3I6yHiMp3lAUouWuFmUEi2'
-
-# إعدادات Telegram
-TELEGRAM_TOKEN = '7906116514:AAHfsj0uuOkqzcWuV5B7T-RIysz7yuyIR_I'
-AUTHORIZED_USER_ID =7792268095
-
 
 CHAT_ID = AUTHORIZED_USER_ID 
 
@@ -57,6 +50,7 @@ from tensorflow.keras.layers import LSTM, Dense, Dropout, BatchNormalization
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.utils import to_categorical
+from tensorflow.compat.v1 import ConfigProto
 import pandas_ta as ta
 from datetime import timedelta, datetime
 import shutil
@@ -827,12 +821,8 @@ def get_signal(symbol, model_dir="models"):
     def clear_keras_memory():
         tf.keras.backend.clear_session()
         gc.collect()
-    # ====== تحسين إعدادات الذاكرة لـ TensorFlow ======
-    import tensorflow as tf
-    from tensorflow.compat.v1 import ConfigProto
-    
-        # ====== تحسين إعدادات الذاكرة لـ TensorFlow ======
-    
+   
+
 
     # تفعيل نمو الذاكرة التلقائي للـ GPU
     gpus = tf.config.experimental.list_physical_devices('GPU')
@@ -847,7 +837,7 @@ def get_signal(symbol, model_dir="models"):
         try:
             tf.config.experimental.set_virtual_device_configuration(
                 gpus[0],
-                [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=6144)]  # 6GB
+                [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=480)]  # 6GB
             )
         except RuntimeError as e:
             print(f"Error setting memory limit: {e}")
@@ -886,7 +876,7 @@ def get_signal(symbol, model_dir="models"):
         logger.error(f"API call failed after {max_retries} attempts")
         return None
 
-    @lru_cache(maxsize=32)
+    @lru_cache(maxsize=4)
     def get_cached_data(symbol, time_frame, since):
         """التخزين المؤقت للبيانات لتجنب إعادة الجلب"""
         cache_key = f"{symbol}_{time_frame}_{since}"
@@ -2107,6 +2097,10 @@ def get_signal(symbol, model_dir="models"):
     message_parts = split_message(final_text)
 
     
+    def clear_memory():
+        tf.keras.backend.clear_session()
+        gc.collect()
+
 
     # تنظيف الذاكرة
     gc.collect()

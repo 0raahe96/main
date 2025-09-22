@@ -1,5 +1,4 @@
 
-CHAT_ID = AUTHORIZED_USER_ID 
 
 
 # في بداية البرنامج
@@ -99,6 +98,7 @@ BINANCE_API_KEY = os.getenv("BINANCE_API_KEY")
 BINANCE_API_SECRET = os.getenv("BINANCE_API_SECRET")
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 AUTHORIZED_USER_ID = os.getenv("AUTHORIZED_USER_ID")
+CHAT_ID = AUTHORIZED_USER_ID 
 
 # ====== تحميل المتغيرات البيئية ======
 current_dir = os.path.dirname(os.path.abspath(__file__))
